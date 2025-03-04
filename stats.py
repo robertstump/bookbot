@@ -23,3 +23,21 @@ def get_book_letter_count(split_words):
         raise Exception("Failed to load letters dictionary.")
 
     return letters
+
+def sort_list_counts(letters):
+
+    sorted_letters = []  
+
+    for letter_set in letters:
+        if(letter_set.isalpha()):
+            sorted_letters.append({"char" : letter_set, "count" : letters[letter_set]})
+
+    if(len(sorted_letters) <= 0):
+        raise Exception("Empty List of Dictionaries")
+
+    def sort_on(sorted_letters):
+        return sorted_letters["count"]
+
+    sorted_letters.sort(reverse=True, key=sort_on)
+
+    return sorted_letters

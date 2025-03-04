@@ -1,5 +1,6 @@
 from stats import get_book_word_count
 from stats import get_book_letter_count
+from stats import sort_list_counts
 
 def get_book_text(filename): 
     with open(filename) as f:
@@ -11,13 +12,15 @@ def get_book_text(filename):
 
 def main(): 
 
+    filename = "books/frankenstein.txt"
     output = ""
     split_list = []
     word_count = 0
     letters = {}
+    sorted_letters = []
     
     try:
-        output = get_book_text("books/frankenstein.txt")
+        output = get_book_text(filename)
     except Exception as e:
         print(e)
 
@@ -33,8 +36,18 @@ def main():
     except Exception as e:
         print(e)
 
-    print(f"{word_count} words found in the document")
-    print (letters)        
+    try:
+        sorted_letters = sort_list_counts(letters)
+    except Exception as e:
+        print(e)
+
+    print("============ BOOKBOT ============")
+    print("Analyzing book found at {filename}...")
+    print("----------- Word Count ----------")
+    print(f"Found {word_count} total words")
+    print("--------- Character Count -------")
+    for sets in sorted_letters:
+        print(f"{sets['char']}: {sets['count']}")
 
     return 0
 
