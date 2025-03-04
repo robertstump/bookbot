@@ -1,3 +1,4 @@
+import sys
 from stats import get_book_word_count
 from stats import get_book_letter_count
 from stats import sort_list_counts
@@ -12,13 +13,19 @@ def get_book_text(filename):
 
 def main(): 
 
-    filename = "books/frankenstein.txt"
+    filename = ""
     output = ""
     split_list = []
     word_count = 0
     letters = {}
     sorted_letters = []
     
+    if(len(sys.argv) < 2 or len(sys.argv) > 2):
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+    else: 
+        filename = sys.argv[1]
+
     try:
         output = get_book_text(filename)
     except Exception as e:
